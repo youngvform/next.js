@@ -213,7 +213,8 @@ function getArgumentsForLineNumber(
 function guessEditor(): string | null {
   // Explicit config always wins
   if (process.env.REACT_EDITOR) {
-    return shellQuote.parse(process.env.REACT_EDITOR)
+    const editor = shellQuote.parse(process.env.REACT_EDITOR)
+    return Array.isArray(editor) ? editor.join(' ') : editor
   }
 
   // We can find out which editor is currently running by:
